@@ -1,4 +1,8 @@
+const fs = require('fs');
 const inquirer = require('inquirer');
+const generatePage = require('./src/page-template');
+// line 3 was added in the code snapshot
+
 const promptUser = () => {
     return inquirer.prompt([
         {
@@ -22,15 +26,28 @@ const promptUser = () => {
                 if (githubInput) {
                     return true;
                 }   else {
-                    console.log('Please enter a Github username!');
+                    console.log('Please enter your Github username!');
                     return false;
                 }
             }
         },
         {
+            type: 'confirm',
+            name: 'confirmAbout',
+            message: 'Would you like to enter some information about yourself for an "About" section?',
+            default: true
+        },
+        {
             type: 'input',
             name: 'about',
-            message: 'Provide some information about yourself:'
+            message: 'Provide some information about yourself:',
+            when: ({ confirmAbout }) => {
+                if (confirmAbout) {
+                    return true;
+                }   else {
+                    return false;
+                }
+            }
         }
     ]);
 };
@@ -118,10 +135,11 @@ if (!portfolioData.projects) {
 promptUser()
     .then(promptProject)
     .then(portfolioData => {
-        console.log(projectAnswers);
+        console.log(portfolioData);
     });
     
 
+// line 143 and 144 are above can remove i think    
 // const fs = require('fs');
 // const generatePage = require('./src/page-template.js');
 
