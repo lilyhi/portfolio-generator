@@ -1,4 +1,6 @@
-const generatePage = (names, github) => {
+// from the code snapshot line 2 is correct?
+// module.exports = (name, github) => {
+const generatePage = (name, github) => {
     return `
     <!DOCTYPE html> 
     <html lang="en"> 
@@ -10,11 +12,12 @@ const generatePage = (names, github) => {
     </head>
 
     <body>
-        <h1>${names}</h1>
+        <h1>${name}</h1>
         <h2><a href="https://github.com/${github}">Github</a></h2>
     </body>
     </html>
     `;
 };
 
+// line 21 has been removed from the codesnapshot
 module.exports = generatePage;
